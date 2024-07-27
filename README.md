@@ -3,5 +3,5 @@ The system allows users to access and view the latest job postings available on 
 
 Key Features
 
-    Access to Latest Job Postings: Users can browse and view the most recent job opportunities available on LinkedIn.
-    Personalized Interview Recommendations: After reviewing a job posting, users can request tailored recommendations to enhance their likelihood of succeeding in the job interview process.
+    1. Access to Latest Job Postings: Users can browse and view the most recent job opportunities available on LinkedIn.
+    2. Personalized Interview Recommendations: After reviewing a job posting, users can request tailored recommendations to enhance their likelihood of succeeding in the job interview process.
