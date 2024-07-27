@@ -1,0 +1,6 @@
+@JobSearchingAI.Middleware_HostAddress = http://localhost:5014
+
+GET {{JobSearchingAI.Middleware_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
