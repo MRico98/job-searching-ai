@@ -1,0 +1,66 @@
+@startuml activitydiagram
+
+start
+
+fork
+
+partition "Frontend" {
+  :User accesses the frontend;
+  :Retrieve job postings from the database via API;
+  :Show job postings to the user;
+  :User selects a job;
+  :Show job details;
+  :User requests AI recommendation;
+}
+
+partition "Middleware" {
+  :Send recommendation request to AI platform;
+  :Notify user that recommendation is being processed;
+  :Queue recomendation request;
+}
+
+fork
+
+partition "RabbitMQ" {
+  :Process recomendation request;
+}
+
+partition "Ollama Service" {
+    :AI platform processes recommendation;
+    :Generate roadmap and recommendations;
+}
+
+forkagain
+
+partition "Frontend" {
+  :User still being able to navigate web page
+    and generate new recomendations;
+}
+
+endfork
+
+partition "Middleware" {
+    :Store recommendations in the database;
+}
+
+partition "Middleware" {
+  :Retrieve generated recommendation from database;
+  :Notify user that recommendation is ready;
+}
+
+partition "Frontend" {
+  :User reviews the recommendation;
+}
+
+fork again
+
+partition "Web Scraping service" {
+    :Daily web scraping from LinkedIn;
+    :Update job postings in the database;
+}
+
+endfork
+
+stop
+
+@enduml
