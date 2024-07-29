@@ -1,0 +1,38 @@
+@startuml sequencediagram
+skinparam ParticipantPadding 20
+
+actor User
+
+box "Client"
+participant "FrontEnd" as FrontEnd
+end box
+
+box "Middleware"
+participant "Controller" as Controller
+end box
+
+box "Application"
+participant "UseCases" as UseCases
+end box
+
+box "Core"
+participant "Core" as Repository
+end box
+
+box "Infraestructure"
+participant "Data" as DbContext
+end box
+
+User -> FrontEnd: Interact with UI
+FrontEnd -> Controller: Fetch information from Endpoint
+Controller -> UseCases: Invoke handler
+UseCases -> Repository: Invoke repository
+Repository -> DbContext: Retrieve information from Database
+
+DbContext -> Repository: Return a set of Entities
+Repository -> UseCases: Return a list of Entities
+UseCases -> Controller: Return a EntitieResponse
+Controller -> FrontEnd: Return a Response
+FrontEnd -> User: Return information to the User
+
+@enduml
