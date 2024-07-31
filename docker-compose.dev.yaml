@@ -3,3 +3,10 @@ services:
     image: plantuml/plantuml-server:tomcat
     ports:
       - "90:8080"
+
+  db:
+    build:
+      context: JobSearchingAI/JobSearchingAI.Infraestructure/Database
+      dockerfile: Dockerfile
+    ports:
+      - "1433:1433"

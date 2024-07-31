@@ -1,0 +1,27 @@
+@startuml
+entity "Companies" {
+    + Id : INT
+    --
+    Name : NVARCHAR(255)
+    Location : NVARCHAR(255)
+}
+
+entity "Jobs" {
+    + Id : INT
+    --
+    Name : NVARCHAR(255)
+    SubrogatedId : INT
+    Description : NVARCHAR(MAX)
+    CompanyId : INT
+}
+
+entity "Recommendations" {
+    + Id : INT
+    --
+    JobId : INT
+    Recommendation : NVARCHAR(MAX)
+}
+
+Companies ||--o{ Jobs : "has"
+Jobs ||--|| Recommendations : "has one"
+@enduml
