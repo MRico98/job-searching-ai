@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobSearchingAI.Infraestruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobSearchingAI.Shared", "JobSearchingAI.Shared\JobSearchingAI.Shared.csproj", "{D529F827-E4F1-49E6-A868-4E44CE4622EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSearchingAI.JobFetcher", "JobSearchingAI.JobFetcher\JobSearchingAI.JobFetcher.csproj", "{651C0317-0C87-43A7-BDCB-3DB178D2A7D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSearchingAI.JobFetcher", "JobSearchingAI.JobFetcher\JobSearchingAI.JobFetcher.csproj", "{B2B0ECE5-C31E-4D32-A30D-09B471F3384C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{D529F827-E4F1-49E6-A868-4E44CE4622EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D529F827-E4F1-49E6-A868-4E44CE4622EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D529F827-E4F1-49E6-A868-4E44CE4622EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{651C0317-0C87-43A7-BDCB-3DB178D2A7D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{651C0317-0C87-43A7-BDCB-3DB178D2A7D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{651C0317-0C87-43A7-BDCB-3DB178D2A7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{651C0317-0C87-43A7-BDCB-3DB178D2A7D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2B0ECE5-C31E-4D32-A30D-09B471F3384C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B0ECE5-C31E-4D32-A30D-09B471F3384C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B0ECE5-C31E-4D32-A30D-09B471F3384C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B0ECE5-C31E-4D32-A30D-09B471F3384C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

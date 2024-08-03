@@ -5,7 +5,7 @@ namespace JobSearchingAI.Infraestructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
-    DbSet<Company> Companies { get; set; }
-    DbSet<Job> Jobs { get; set; }
-    DbSet<Recommendation> Recommendations { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<Job> Jobs { get; set; }
+    public DbSet<Recommendation> Recommendations { get; set; }
 }

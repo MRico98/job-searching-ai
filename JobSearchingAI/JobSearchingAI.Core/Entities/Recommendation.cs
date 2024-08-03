@@ -1,9 +1,9 @@
 namespace JobSearchingAI.Core.Entities;
 
-public class Recommendation
+public class Recommendation : IEntity
 {
-    public int Id { get; set; }
-    public int JobId { get; set; }
+    public Guid Id { get; set; }
+    public Guid JobId { get; set; }
     public string? RecommendationText { get; set; }
 
     public Job? Job { get; set; }
