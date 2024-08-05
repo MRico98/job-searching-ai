@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\JobSearchingAI.Core\JobSearchingAI.Core.csproj" />
     <ProjectReference Include="..\JobSearchingAI.Infraestructure\JobSearchingAI.Infraestructure.csproj" />
+    <ProjectReference Include="..\JobSearchingAI.Application\JobSearchingAI.Application.csproj" />
   </ItemGroup>
 
 </Project>

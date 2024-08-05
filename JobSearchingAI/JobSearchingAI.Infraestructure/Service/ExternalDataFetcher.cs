@@ -1,23 +1,48 @@
-using Newtonsoft.Json.Converters;
 using JobSearchingAI.Core.Core;
-using JobSearchingAI.Core.Entities;
-using Newtonsoft.Json;
-using JobSearchingAI.Infraestructure.Service.Response;
+using Microsoft.Extensions.Logging;
+using JobSearchingAI.Infraestructure.Exceptions;
 
 namespace JobSearchingAI.Infraestructure.Service;
 
-public class ExternalDataFetcher(HttpClient httpClient) : IExternalDataFetcher
+public class ExternalDataFetcher(HttpClient httpClient, ILogger<ExternalDataFetcher> logger) : IExternalDataFetcher
 {
     private readonly HttpClient _httpClient = httpClient;
+    private readonly ILogger _logger = logger;
 
-    public async Task<JobSearchResults> FetchDataAsync()
+    public async Task<byte[]> FetchDataAsync(string url)
     {
-        var response = await _httpClient.GetAsync("https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=6ea5d302&app_key=dfd7dc3422fa670bbb494489dbcd76dd");
-        response.EnsureSuccessStatusCode();
-        var jsonString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonString);
-        //Console.WriteLine(response.Content);
-        //var apiResponse = JsonConvert.DeserializeObject<ApiJobSearchResults>(jsonString);
-        return null;
+        try
+        {
+            HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync(url);
+
+            httpResponseMessage.EnsureSuccessStatusCode();
+
+            return await httpResponseMessage.Content.ReadAsByteArrayAsync();
+        }
+        catch(HttpRequestException)
+        {
+            _logger.LogError("Invalid Http request: Check the ExternalDataFetcher class");
+            throw new InvalidHttpRequestException("Invalid Http request: Check the ExternalDataFetcher class");
+        }
+    }
+
+    public async Task<byte[]> FetchDataAsync(string url, Dictionary<string, string> queryParams)
+    {
+        try
+        {
+            var queryString = new FormUrlEncodedContent(queryParams).ReadAsStringAsync().Result;
+            var requestUrl = $"{url}?{queryString}";
+            
+            HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync(requestUrl);
+
+            httpResponseMessage.EnsureSuccessStatusCode();
+
+            return await httpResponseMessage.Content.ReadAsByteArrayAsync();
+        }
+        catch (HttpRequestException)
+        {
+            _logger.LogError("Invalid Http request: Check the ExternalDataFetcher class");
+            throw new InvalidHttpRequestException("Invalid Http request: Check the ExternalDataFetcher class");
+        }
     }
 }

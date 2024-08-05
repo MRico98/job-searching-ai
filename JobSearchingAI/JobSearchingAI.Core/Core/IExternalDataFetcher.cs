@@ -4,5 +4,7 @@ namespace JobSearchingAI.Core.Core;
 
 public interface IExternalDataFetcher
 {
-    Task<JobSearchResults> FetchDataAsync();
+    Task<byte[]> FetchDataAsync(string url);
+    Task<byte[]> FetchDataAsync(string url, Dictionary<string, string> queryParams);
+
 }

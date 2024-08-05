@@ -1,15 +1,18 @@
+using System.Text;
+using JobSearchingAI.Application.UseCases.FetchAndProcessJob;
 using JobSearchingAI.Core.Core;
+using JobSearchingAI.Infraestructure.Service.Config;
+using JobSearchingAI.Infraestructure.Service.Response;
+using Newtonsoft.Json;
 
 namespace JobSearchingAI.JobFetcher.Service;
 
-public class ConsoleService(string connectionString, IExternalDataFetcher externalDataFetcher) : IConsoleService
+public class ConsoleService(FetchAndProcessJob fetchAndProcessJob) : IConsoleService
 {
-    private readonly string _connectionString = connectionString;
-    private readonly IExternalDataFetcher _externalDataFetcher = externalDataFetcher;
+    private readonly FetchAndProcessJob _fetchAndProcessJob = fetchAndProcessJob;
 
     public async Task RunAsync()
     {
-        await _externalDataFetcher.FetchDataAsync();
-        Console.WriteLine(_connectionString);
+        await _fetchAndProcessJob.HandleAsync();
     }
 }
