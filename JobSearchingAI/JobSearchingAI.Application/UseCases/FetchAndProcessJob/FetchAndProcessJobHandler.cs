@@ -26,6 +26,7 @@ public class FetchAndProcessJob(IRepository<Job> repository, IExternalDataFetche
         var apiResultBytes = await _externalDataFetcher.FetchDataAsync(apiUrl ,dictionary);
         var apiResultString = Encoding.UTF8.GetString(apiResultBytes);
         var deserealizationObject = JsonConvert.DeserializeObject<ApiJobSearchResults>(apiResultString);
-        Console.WriteLine(deserealizationObject.Count);
+        Console.WriteLine(deserealizationObject.Results[0].SalaryMax);
+        
     }
 }
