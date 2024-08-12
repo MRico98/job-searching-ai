@@ -1,4 +1,5 @@
 using System.Text;
+using AutoMapper;
 using JobSearchingAI.Core.Core;
 using JobSearchingAI.Core.Entities;
 using JobSearchingAI.Infraestructure.Service.Config;
@@ -7,8 +8,9 @@ using Newtonsoft.Json;
 
 namespace JobSearchingAI.Application.UseCases.FetchAndProcessJob;
 
-public class FetchAndProcessJob(IRepository<Job> repository, IExternalDataFetcher externalDataFetcher, ApiSettings apiSettings)
+public class FetchAndProcessJob(IMapper mapper, IRepository<Job> repository, IExternalDataFetcher externalDataFetcher, ApiSettings apiSettings)
 {
+    private readonly IMapper _mapper = mapper;
     private readonly IRepository<Job> _repository = repository;
     private readonly IExternalDataFetcher _externalDataFetcher = externalDataFetcher;
     private readonly ApiSettings _apiSettings = apiSettings;
@@ -26,7 +28,15 @@ public class FetchAndProcessJob(IRepository<Job> repository, IExternalDataFetche
         var apiResultBytes = await _externalDataFetcher.FetchDataAsync(apiUrl ,dictionary);
         var apiResultString = Encoding.UTF8.GetString(apiResultBytes);
         var deserealizationObject = JsonConvert.DeserializeObject<ApiJobSearchResults>(apiResultString);
-        Console.WriteLine(deserealizationObject.Results[0].SalaryMax);
-        
+        List<ApiJob> results = deserealizationObject.Results;
+        var jobs = _mapper.Map<List<Job>>(results);
+        foreach(Job resultJob in jobs)
+        {
+            Console.WriteLine("Job ID: " + resultJob.Id);
+            Console.WriteLine("Job Name: " + resultJob.Name);
+            Console.WriteLine("Job Description: " + resultJob.Description);
+            Console.WriteLine("Company ID: " + resultJob.Company.Id);
+            Console.WriteLine("Company Name: " + resultJob.Company.Name);
+        }        
     }
 }

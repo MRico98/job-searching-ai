@@ -1,5 +1,6 @@
 ﻿using JobSearchingAI.Core.Core;
 using JobSearchingAI.Core.Entities;
+using JobSearchingAI.Infraestructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace JobSearchingAI.Infraestructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity
     {
-        private readonly DbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();
