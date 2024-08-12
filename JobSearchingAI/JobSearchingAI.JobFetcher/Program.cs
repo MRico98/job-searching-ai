@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 using JobSearchingAI.Application.UseCases.FetchAndProcessJob;
 using JobSearchingAI.Core.Entities;
 using JobSearchingAI.Infraestructure.Repositories;
+using JobSearchingAI.Infraestructure.Data;
+using Microsoft.EntityFrameworkCore;
+using JobSearchingAI.Application.Mappings;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((context, config) =>
@@ -24,6 +27,8 @@ var host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((context, services) =>
     {
+        services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseSqlServer(context.Configuration.GetConnectionString("DefaultConnection")));
         services.AddSingleton<IExternalDataFetcher, ExternalDataFetcher>();
         services.AddSingleton<IConsoleService, ConsoleService>();
         services.AddTransient<IRepository<Job>, Repository<Job>>();
@@ -31,6 +36,7 @@ var host = Host.CreateDefaultBuilder(args)
         services.Configure<ApiSettings>(context.Configuration.GetSection("ApiSettings"));
         services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<ApiSettings>>().Value);
         services.AddTransient<FetchAndProcessJob>();
+        services.AddAutoMapper(typeof(ApplicationMapperProfile).Assembly);
     })
     .Build();
 

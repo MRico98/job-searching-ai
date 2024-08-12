@@ -4,7 +4,6 @@ namespace JobSearchingAI.Infraestructure.Service.Response;
 
 public class ApiCompany
 {
-    [JsonProperty("__CLASS__")]
-    public string Class { get; set; }
+    [JsonProperty("display_name")]
     public string DisplayName { get; set; }
 }
